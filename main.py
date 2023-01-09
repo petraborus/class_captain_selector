@@ -1,5 +1,6 @@
 '''
 This program allows the user to enter candidates and have a vote to determine a winner
+Author: Petra Borus
 '''
 
 
@@ -104,7 +105,7 @@ def save_candidate_info():
         enter_candidate_window.warn("empty", "One or more fields are empty. Please fill out before saving.")
     else:
         if number_of_candidates == 0:
-            #adds info from text boxes to the list
+            # adds info from text boxes to the list
             candidates_info_list[0].append([name_textbox.value, age_textbox.value, goals_textbox.value, reason_of_choice_textbox.value])
             candidates_info_list[0].append(0)
             candidate_hidden_names_list.append("Candidate 1")
@@ -416,48 +417,6 @@ def voting_results():
             winner_text = Text(winner_text_box, text="NEW CLASS CAPTAIN: " + str(candidates_votes_list[0][0]), font="PT Sans", size=24)
         else:
             winner_text = Text(winner_text_box, text="NO OVERALL WINNER", font="PT Sans", size=24)
-
-    '''
-    # results put in a list box depending on descending order + winner/no overall winner texts displayed if it's a tie or not
-    if number_of_candidates == 2:
-        if candidates_info_list[0][2] > candidates_info_list[1][2]:
-            candidate_results = ListBox(names_and_votes_box, items=[str(candidates_info_list[0][1][0]) + " - " + str(candidates_info_list[0][2]), str(candidates_info_list[1][1][0]) + " - " + str(candidates_info_list[1][2])])
-            winner_text = Text(winner_text_box, text="NEW CLASS CAPTAIN: " + str(candidates_info_list[0][1][0]), font="PT Sans", size=24)
-        elif candidates_info_list[1][2] > candidates_info_list[0][2]:
-            candidate_results = ListBox(names_and_votes_box, items=[str(candidates_info_list[1][1][0]) + " - " + str(candidates_info_list[1][2]), str(candidates_info_list[0][1][0]) + " - " + str(candidates_info_list[0][2])])
-            winner_text = Text(winner_text_box, text="NEW CLASS CAPTAIN: " + str(candidates_info_list[1][1][0]), font="PT Sans", size=24)
-        elif candidates_info_list[1][2] == candidates_info_list[0][2]:
-            candidate_results = ListBox(names_and_votes_box, items=[str(candidates_info_list[0][1][0]) + " - " + str(candidates_info_list[0][2]), str(candidates_info_list[1][1][0]) + " - " + str(candidates_info_list[1][2])])
-            winner_text = Text(winner_text_box, text="NO OVERALL WINNER", font="PT Sans", size=24)
-    elif number_of_candidates == 3:
-        if candidates_info_list[0][2] > candidates_info_list[1][2] and candidates_info_list[0][2] > candidates_info_list[2][2]:
-            if candidates_info_list[1][2] >= candidates_info_list[2][2]:
-                candidate_results = ListBox(names_and_votes_box, items=[str(candidates_info_list[0][1][0]) + " - " + str(candidates_info_list[0][2]), str(candidates_info_list[1][1][0]) + " - " + str(candidates_info_list[1][2]), str(candidates_info_list[2][1][0]) + " - " + str(candidates_info_list[2][2])])
-            elif candidates_info_list[1][2] < candidates_info_list[2][2]:
-                candidate_results = ListBox(names_and_votes_box, items=[str(candidates_info_list[0][1][0]) + " - " + str(candidates_info_list[0][2]), str(candidates_info_list[2][1][0]) + " - " + str(candidates_info_list[2][2]), str(candidates_info_list[1][1][0]) + " - " + str(candidates_info_list[1][2])])
-            winner_text = Text(winner_text_box, text="NEW CLASS CAPTAIN: " + str(candidates_info_list[0][1][0]), font="PT Sans", size=24)
-        elif candidates_info_list[1][2] > candidates_info_list[0][2] and candidates_info_list[1][2] > candidates_info_list[2][2]:
-            if candidates_info_list[0][2] >= candidates_info_list[2][2]:
-                candidate_results = ListBox(names_and_votes_box, items=[str(candidates_info_list[1][1][0]) + " - " + str(candidates_info_list[1][2]), str(candidates_info_list[0][1][0]) + " - " + str(candidates_info_list[0][2]), str(candidates_info_list[2][1][0]) + " - " + str(candidates_info_list[2][2])])
-            elif candidates_info_list[2][2] < candidates_info_list[0][2]:
-                candidate_results = ListBox(names_and_votes_box, items=[str(candidates_info_list[1][1][0]) + " - " + str(candidates_info_list[1][2]), str(candidates_info_list[2][1][0]) + " - " + str(candidates_info_list[2][2]), str(candidates_info_list[0][1][0]) + " - " + str(candidates_info_list[0][2])])
-            winner_text = Text(winner_text_box, text="NEW CLASS CAPTAIN: " + str(candidates_info_list[1][1][0]), font="PT Sans", size=24)
-        elif candidates_info_list[2][2] > candidates_info_list[0][2] and candidates_info_list[2][2] > candidates_info_list[1][2]:
-            if candidates_info_list[0][2] >= candidates_info_list[1][2]:
-                candidate_results = ListBox(names_and_votes_box, items=[str(candidates_info_list[2][1][0]) + " - " + str(candidates_info_list[2][2]), str(candidates_info_list[0][1][0]) + " - " + str(candidates_info_list[0][2]), str(candidates_info_list[1][1][0]) + " - " + str(candidates_info_list[1][2])])
-            elif candidates_info_list[2][2] < candidates_info_list[0][2]:
-                candidate_results = ListBox(names_and_votes_box, items=[str(candidates_info_list[2][1][0]) + " - " + str(candidates_info_list[2][2]), str(candidates_info_list[1][1][0]) + " - " + str(candidates_info_list[1][2]), str(candidates_info_list[0][1][0]) + " - " + str(candidates_info_list[0][2])])
-            winner_text = Text(winner_text_box, text="NEW CLASS CAPTAIN: " + str(candidates_info_list[2][1][0]), font="PT Sans", size=24)
-        elif candidates_info_list[2][2] > candidates_info_list[0][2] and candidates_info_list[2][2] == candidates_info_list[1][2]:
-            candidate_results = ListBox(names_and_votes_box, items=[str(candidates_info_list[2][1][0]) + " - " + str(candidates_info_list[2][2]), str(candidates_info_list[1][1][0]) + " - " + str(candidates_info_list[1][2]), str(candidates_info_list[0][1][0]) + " - " + str(candidates_info_list[0][2])])
-            winner_text = Text(winner_text_box, text="NO OVERALL WINNER", font="PT Sans", size=24)
-        elif candidates_info_list[1][2] > candidates_info_list[2][2] and candidates_info_list[1][2] == candidates_info_list[0][2]:
-            candidate_results = ListBox(names_and_votes_box, items=[str(candidates_info_list[0][1][0]) + " - " + str(candidates_info_list[0][2]), str(candidates_info_list[1][1][0]) + " - " + str(candidates_info_list[1][2]), str(candidates_info_list[2][1][0]) + " - " + str(candidates_info_list[2][2])])
-            winner_text = Text(winner_text_box, text="NO OVERALL WINNER", font="PT Sans", size=24)
-    elif number_of_candidates == 4:
-        candidate_results = ListBox(names_and_votes_box, items=[str(candidates_info_list[0][1][0]) + " - " + str(candidates_info_list[0][2]), str(candidates_info_list[1][1][0]) + " - " + str(candidates_info_list[1][2]), str(candidates_info_list[2][1][0]) + " - " + str(candidates_info_list[2][2]), str(candidates_info_list[3][1][0]) + " - " + str(candidates_info_list[3][2])])
-'''
-
     voting_results_window.when_closed = close_final_window
 
 
